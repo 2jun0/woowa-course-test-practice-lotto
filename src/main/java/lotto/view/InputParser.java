@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class InputParser {
+public class InputParser {
 
     static final String WINNING_NUMBERS_DELIMITER = ",";
 

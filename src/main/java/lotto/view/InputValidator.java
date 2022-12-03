@@ -1,6 +1,6 @@
 package lotto.view;
 
-class InputValidator {
+public class InputValidator {
 
     static final String LOTTO_PURCHASE_MONEY_REGEX = "^\\d+$";
     static final String BONUS_NUMBER_REGEX = "^\\d+$";
