@@ -8,8 +8,8 @@ public class InputParser {
 
     public static final String WINNING_NUMBERS_DELIMITER = ",";
 
-    public int parseLottoPrice(String lottoPrice) {
-        return Integer.parseInt(lottoPrice);
+    public int parseLottoPurchaseMoney(String lottoPurchaseMoney) {
+        return Integer.parseInt(lottoPurchaseMoney);
     }
 
     public List<Integer> parseWinningNumbers(String winningNumbers) {

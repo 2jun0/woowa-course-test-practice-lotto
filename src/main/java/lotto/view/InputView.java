@@ -6,17 +6,20 @@ import java.util.List;
 public class InputView {
 
     private final InputParser inputParser;
+    private final InputValidator inputValidator;
 
-    public InputView(InputParser inputParser) {
+    public InputView(InputParser inputParser, InputValidator inputValidator) {
         this.inputParser = inputParser;
+        this.inputValidator = inputValidator;
     }
 
-    public int inputLottoPrice() {
+    public int inputLottoPurchaseMoney() {
         printLine("구입금액을 입력해 주세요.");
-        String lottoPrice = readLine();
+        String lottoPurchaseMoney = readLine();
         printEmptyLine();
 
-        return inputParser.parseLottoPrice(lottoPrice);
+        inputValidator.validateLottoPurchaseMoney(lottoPurchaseMoney);
+        return inputParser.parseLottoPurchaseMoney(lottoPurchaseMoney);
     }
 
     public List<Integer> inputWinningNumbers() {
