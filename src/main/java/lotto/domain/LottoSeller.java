@@ -16,6 +16,7 @@ public class LottoSeller {
     }
 
     public List<Lotto> buyLottoList(int money) {
+        validateBuyLottoMoney(money);
         int lottoCount = getLottoCount(money);
 
         return Stream.generate(this::generateLotto)
@@ -32,5 +33,11 @@ public class LottoSeller {
 
     private int getLottoCount(int money) {
         return money / LOTTO_PRICE;
+    }
+
+    private void validateBuyLottoMoney(int money) {
+        if (money <= 0 || money % 1000 != 0) {
+            throw new IllegalArgumentException("로또 구입 금액은 1,000단위의 양수여야 합니다.");
+        }
     }
 }
