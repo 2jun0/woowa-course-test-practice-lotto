@@ -8,19 +8,19 @@ public class InputValidator {
 
     void validateLottoPurchaseMoney(String money) {
         if (!money.matches(LOTTO_PURCHASE_MONEY_REGEX)) {
-            throw new IllegalArgumentException("로또 구입 금액은 숫자여야 합니다.");
+            throw new IllegalArgumentException("로또 구입 금액은 정수여야 합니다.");
         }
     }
 
     public void validateWinningNumbers(String winningNumbers) {
         if (!winningNumbers.matches(WINNING_NUMBERS_REGEX)) {
-            throw new IllegalArgumentException("당첨 번호는 \"숫자,숫자,숫자,숫자,숫자,숫자\" 형식으로 입력해주세요");
+            throw new IllegalArgumentException("당첨 번호는 \"정수,정수,정수,정수,정수,정수\" 형식으로 입력해주세요");
         }
     }
 
     void validateBonusNumber(String bonusNumber) {
         if (!bonusNumber.matches(BONUS_NUMBER_REGEX)) {
-            throw new IllegalArgumentException("보너스 번호는 숫자여야 합니다.");
+            throw new IllegalArgumentException("보너스 번호는 정수여야 합니다.");
         }
     }
 }
