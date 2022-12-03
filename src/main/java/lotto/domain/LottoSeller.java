@@ -7,7 +7,7 @@ import lotto.util.RandomNumbersGenerator;
 
 public class LottoSeller {
 
-    public static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private final RandomNumbersGenerator randomNumbersGenerator;
 
@@ -24,7 +24,9 @@ public class LottoSeller {
     }
 
     private Lotto generateLotto() {
-        List<Integer> randomNumbers = randomNumbersGenerator.generate(1, 45, 6);
+        List<Integer> randomNumbers = randomNumbersGenerator.generate(
+                Lotto.LOTTO_MIN_NUMBER_INCLUSIVE, Lotto.LOTTO_MAX_NUMBER_INCLUSIVE,
+                Lotto.LOTTO_NUMBER_COUNT);
         return new Lotto(randomNumbers);
     }
 
