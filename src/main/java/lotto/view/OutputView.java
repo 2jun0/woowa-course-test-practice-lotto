@@ -1,7 +1,10 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrize;
 
 public class OutputView {
 
@@ -37,6 +40,10 @@ public class OutputView {
 
     public void printYield(double yield) {
         printLine("총 수익률은 %.1f%%입니다.", yield*100);
+    }
+
+    public void printError(String message) {
+        printLine("[ERROR] %s", message);
     }
 
     public void printLine(String format, Object... args) {
