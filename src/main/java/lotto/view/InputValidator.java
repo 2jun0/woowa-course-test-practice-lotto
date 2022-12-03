@@ -1,10 +1,10 @@
 package lotto.view;
 
-public class InputValidator {
+class InputValidator {
 
-    public static final String LOTTO_PURCHASE_MONEY_REGEX = "^\\d+$";
-    public static final String BONUS_NUMBER_REGEX = "^\\d+$";
-    public static final String WINNING_NUMBERS_REGEX = "^\\d+,\\d+,\\d+,\\d+,\\d+,\\d+$";
+    static final String LOTTO_PURCHASE_MONEY_REGEX = "^\\d+$";
+    static final String BONUS_NUMBER_REGEX = "^\\d+$";
+    static final String WINNING_NUMBERS_REGEX = "^\\d+,\\d+,\\d+,\\d+,\\d+,\\d+$";
 
     void validateLottoPurchaseMoney(String money) {
         if (!money.matches(LOTTO_PURCHASE_MONEY_REGEX)) {
@@ -12,7 +12,7 @@ public class InputValidator {
         }
     }
 
-    public void validateWinningNumbers(String winningNumbers) {
+    void validateWinningNumbers(String winningNumbers) {
         if (!winningNumbers.matches(WINNING_NUMBERS_REGEX)) {
             throw new IllegalArgumentException("당첨 번호는 \"정수,정수,정수,정수,정수,정수\" 형식으로 입력해주세요");
         }
