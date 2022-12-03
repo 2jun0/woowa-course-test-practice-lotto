@@ -34,6 +34,8 @@ public enum LottoPrize {
         return matchCountToLottoPrizeWithoutBonus.get(matchCount);
     }
 
+    public int matchCount() { return matchCount; }
+
     public int prize() {
         return prize;
     }
