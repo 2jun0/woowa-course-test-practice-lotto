@@ -30,6 +30,14 @@ public class InputView {
         return inputParser.parseWinningNumbers(winningNumbers);
     }
 
+    public int inputBonusNumber() {
+        printLine("보너스 번호를 입력해 주세요.");
+        String bonusNumber = readLine();
+        printEmptyLine();
+
+        return inputParser.parseBonusNumber(bonusNumber);
+    }
+
     private String readLine() {
         return Console.readLine().trim();
     }
