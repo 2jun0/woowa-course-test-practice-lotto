@@ -27,6 +27,7 @@ public class InputView {
         String winningNumbers = readLine();
         printEmptyLine();
 
+        inputValidator.validateWinningNumbers(winningNumbers);
         return inputParser.parseWinningNumbers(winningNumbers);
     }
 
