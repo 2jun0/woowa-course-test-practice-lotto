@@ -13,7 +13,7 @@ public class InputView {
 
     public int inputLottoPrice() {
         printLine("구입금액을 입력해 주세요.");
-        String lottoPrice = Console.readLine();
+        String lottoPrice = readLine();
         printEmptyLine();
 
         return inputParser.parseLottoPrice(lottoPrice);
@@ -21,10 +21,14 @@ public class InputView {
 
     public List<Integer> inputWinningNumbers() {
         printLine("당청 번호를 입력해 주세요.");
-        String winningNumbers = Console.readLine();
+        String winningNumbers = readLine();
         printEmptyLine();
 
         return inputParser.parseWinningNumbers(winningNumbers);
+    }
+
+    private String readLine() {
+        return Console.readLine().trim();
     }
 
     private void printLine(String s) {
