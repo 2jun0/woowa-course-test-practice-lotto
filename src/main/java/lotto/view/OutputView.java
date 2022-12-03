@@ -15,7 +15,7 @@ public class OutputView {
     }
 
     public void printPurchasedLottoList(List<Lotto> lottoList) {
-        printLine("%d개를 구매했습니다.");
+        printLine("%d개를 구매했습니다.", lottoList.size());
         lottoList.forEach(this::printLottoNumbers);
         printEmptyLine();
     }
