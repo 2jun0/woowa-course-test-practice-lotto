@@ -35,6 +35,7 @@ public class InputView {
         String bonusNumber = readLine();
         printEmptyLine();
 
+        inputValidator.validateBonusNumber(bonusNumber);
         return inputParser.parseBonusNumber(bonusNumber);
     }
 
