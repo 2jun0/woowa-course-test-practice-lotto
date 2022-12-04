@@ -6,8 +6,17 @@ public class WinningNumbers {
 
     private final List<Integer> winningNumbers;
 
-    public WinningNumbers(List<Integer> standardNumbers) {
-        this.winningNumbers = standardNumbers;
+    public WinningNumbers(List<Integer> winningNumbers) {
+        validateWinningNumbersSize(winningNumbers);
+
+        this.winningNumbers = winningNumbers;
+    }
+
+    private void validateWinningNumbersSize(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != Lotto.LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(
+                    String.format("당첨번호의 개수는 %d여야 합니다.", Lotto.LOTTO_NUMBER_COUNT));
+        }
     }
 
     public int matchCount(Lotto lotto) {
