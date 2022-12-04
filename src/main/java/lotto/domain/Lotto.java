@@ -27,4 +27,11 @@ public class Lotto {
     public List<Integer> numbers() {
         return numbers;
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }

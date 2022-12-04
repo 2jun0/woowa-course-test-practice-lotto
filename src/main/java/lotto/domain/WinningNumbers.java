@@ -15,4 +15,11 @@ public class WinningNumbers {
                 .filter(lotto::contains)
                 .count();
     }
+
+    @Override
+    public String toString() {
+        return "WinningNumbers{" +
+                "winningNumbers=" + winningNumbers +
+                '}';
+    }
 }

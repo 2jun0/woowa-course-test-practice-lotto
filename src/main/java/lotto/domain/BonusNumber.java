@@ -11,4 +11,11 @@ public class BonusNumber {
     public boolean match(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
+
+    @Override
+    public String toString() {
+        return "BonusNumber{" +
+                "bonusNumber=" + bonusNumber +
+                '}';
+    }
 }
