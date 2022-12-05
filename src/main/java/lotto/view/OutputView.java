@@ -1,10 +1,10 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
+import lotto.domain.WinningResults;
 
 public class OutputView {
 
@@ -25,21 +25,24 @@ public class OutputView {
         printLine(formattedLottoNumbers);
     }
 
-    public void printWinningStatistics(List<LottoPrize> lottoPrizes, double yield) {
+    public void printWinningStatistics(WinningResults results, double yield) {
         printLine("당첨 통계");
         printLine("---");
 
-        Arrays.stream(LottoPrize.values())
-                .sorted(Collections.reverseOrder())
-                .map(lottoPrize ->
-                        outputFormatter.formatLottoPrizeStatistics(lottoPrize,
-                                Collections.frequency(lottoPrizes, lottoPrize)))
-                .forEach(this::printLine);
+        printLottoPrizesCount(results.countOfPrize());
         printYield(yield);
     }
 
+    private void printLottoPrizesCount(Map<LottoPrize, Integer> countOfPrize) {
+        for (LottoPrize lottoPrize : LottoPrize.values()) {
+            String formattedLottoPrizeCount = outputFormatter.formatLottoPrizeCount(
+                    lottoPrize, countOfPrize.get(lottoPrize));
+            printLine(formattedLottoPrizeCount);
+        }
+    }
+
     public void printYield(double yield) {
-        printLine("총 수익률은 %.1f%%입니다.", yield*100);
+        printLine("총 수익률은 %.1f%%입니다.", yield * 100);
     }
 
     public void printError(String message) {

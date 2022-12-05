@@ -15,7 +15,7 @@ public class OutputFormatter {
         return joiner.toString();
     }
 
-    String formatLottoPrizeStatistics(LottoPrize lottoPrize, int count) {
+    String formatLottoPrizeCount(LottoPrize lottoPrize, int count) {
         if (LottoPrize.SECOND.equals(lottoPrize)) {
             return String.format("%s개 일치, 보너스 볼 일치 (%,d원) - %d개",
                     lottoPrize.matchCount(), lottoPrize.prize(), count);

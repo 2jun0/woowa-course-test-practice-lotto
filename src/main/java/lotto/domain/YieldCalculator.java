@@ -1,16 +1,16 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Map;
 
 public class YieldCalculator {
 
-    public double yield(List<LottoPrize> lottoPrizes, int purchaseMoney) {
-        return (double) sumOfPrize(lottoPrizes) / purchaseMoney;
+    public double yield(WinningResults winningResults, int money) {
+        return (double) sumOfPrize(winningResults.countOfPrize()) / money;
     }
 
-    private int sumOfPrize(List<LottoPrize> lottoPrizes) {
-        return lottoPrizes.stream()
-                .mapToInt(LottoPrize::prize)
+    private int sumOfPrize(Map<LottoPrize, Integer> countOfPrize) {
+        return countOfPrize.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().prize() * entry.getValue())
                 .sum();
     }
 }

@@ -9,6 +9,7 @@ import lotto.domain.LottoPrize;
 import lotto.domain.LottoSeller;
 import lotto.domain.WinningNumberSet;
 import lotto.domain.WinningNumbers;
+import lotto.domain.WinningResults;
 import lotto.domain.YieldCalculator;
 import lotto.util.RandomNumbersGenerator;
 import lotto.view.InputView;
@@ -38,11 +39,11 @@ public class LottoGameMachine {
 
         WinningNumberSet winningNumberSet = inputWinningNumberSet();
 
-        List<LottoPrize> lottoPrizes = matchLottoListWithWinningNumberSet(
+        WinningResults winningResults = matchLottoListWithWinningNumberSet(
                 lottoList, winningNumberSet);
 
-        double yield = calculateYield(lottoPrizes, purchaseMoney);
-        outputView.printWinningStatistics(lottoPrizes, yield);
+        double yield = calculateYield(winningResults, purchaseMoney);
+        outputView.printWinningStatistics(winningResults, yield);
     }
 
     private int inputLottoPurchaseMoney() {
@@ -75,16 +76,18 @@ public class LottoGameMachine {
         return new BonusNumber(bonusNumber);
     }
 
-    private List<LottoPrize> matchLottoListWithWinningNumberSet(
+    private WinningResults matchLottoListWithWinningNumberSet(
             List<Lotto> lottoList, WinningNumberSet winningNumberSet) {
-        return lottoList.stream()
+        List<LottoPrize> lottoPrizes = lottoList.stream()
                 .map(winningNumberSet::match)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toUnmodifiableList());
+
+        return new WinningResults(lottoPrizes);
     }
 
-    private double calculateYield(List<LottoPrize> lottoPrizes, int purchaseMoney) {
+    private double calculateYield(WinningResults results, int purchaseMoney) {
         YieldCalculator yieldCalculator = new YieldCalculator();
-        return yieldCalculator.yield(lottoPrizes, purchaseMoney);
+        return yieldCalculator.yield(results, purchaseMoney);
     }
 }
