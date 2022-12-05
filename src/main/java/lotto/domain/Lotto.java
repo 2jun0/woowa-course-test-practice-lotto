@@ -10,13 +10,27 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validate(numbers);
+        validateLottoNumberSize(numbers);
+        validateLottoNumbersRange(numbers);
+
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validateLottoNumberSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(
+                    String.format("로또 번호의 개수는 %d개여야 합니다.", LOTTO_NUMBER_COUNT));
+        }
+    }
+
+    private void validateLottoNumbersRange(List<Integer> numbers) {
+        numbers.forEach(this::validateLottoNumberRange);
+    }
+
+    private void validateLottoNumberRange(int number) {
+        if (!(LOTTO_MIN_NUMBER_INCLUSIVE <= number && number <= LOTTO_MAX_NUMBER_INCLUSIVE)) {
+            throw new IllegalArgumentException(String.format("로또 번호는 %d부터 %d까지 여야 합니다.",
+                    LOTTO_MIN_NUMBER_INCLUSIVE, LOTTO_MAX_NUMBER_INCLUSIVE));
         }
     }
 
