@@ -49,6 +49,10 @@ public class WinningNumbers {
                 .count();
     }
 
+    public boolean contains(int number) {
+        return winningNumbers.contains(number);
+    }
+
     @Override
     public String toString() {
         return "WinningNumbers{" +
