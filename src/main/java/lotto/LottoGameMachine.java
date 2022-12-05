@@ -5,9 +5,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
-import lotto.domain.LottoMatcher;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoSeller;
+import lotto.domain.WinningNumberSet;
 import lotto.domain.WinningNumbers;
 import lotto.domain.YieldCalculator;
 import lotto.util.RandomNumbersGenerator;
@@ -36,11 +36,10 @@ public class LottoGameMachine {
         int purchaseMoney = inputLottoPurchaseMoney();
         List<Lotto> lottoList = buyLottoList(purchaseMoney);
 
-        WinningNumbers winningNumbers = inputWinningNumbers();
-        BonusNumber bonusNumber = inputBonusNumber();
+        WinningNumberSet winningNumberSet = inputWinningNumberSet();
 
-        List<LottoPrize> lottoPrizes = matchLottoListWithWinningNumbersAndBonusNumber(
-                lottoList, winningNumbers, bonusNumber);
+        List<LottoPrize> lottoPrizes = matchLottoListWithWinningNumberSet(
+                lottoList, winningNumberSet);
 
         double yield = calculateYield(lottoPrizes, purchaseMoney);
         outputView.printWinningStatistics(lottoPrizes, yield);
@@ -59,6 +58,13 @@ public class LottoGameMachine {
         return lottoList;
     }
 
+    private WinningNumberSet inputWinningNumberSet() {
+        WinningNumbers winningNumbers = inputWinningNumbers();
+        BonusNumber bonusNumber = inputBonusNumber();
+
+        return new WinningNumberSet(winningNumbers, bonusNumber);
+    }
+
     private WinningNumbers inputWinningNumbers() {
         List<Integer> winningNumbers = inputView.inputWinningNumbers();
         return new WinningNumbers(winningNumbers);
@@ -69,12 +75,10 @@ public class LottoGameMachine {
         return new BonusNumber(bonusNumber);
     }
 
-    private List<LottoPrize> matchLottoListWithWinningNumbersAndBonusNumber(List<Lotto> lottoList,
-            WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        LottoMatcher lottoMatcher = new LottoMatcher();
-
+    private List<LottoPrize> matchLottoListWithWinningNumberSet(
+            List<Lotto> lottoList, WinningNumberSet winningNumberSet) {
         return lottoList.stream()
-                .map(lotto -> lottoMatcher.match(lotto, winningNumbers, bonusNumber))
+                .map(winningNumberSet::match)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toUnmodifiableList());
     }
