@@ -23,14 +23,14 @@ class LottoSellerTest {
     @Nested
     class BuyLottoListTest {
 
-        @ParameterizedTest()
+        @ParameterizedTest(name = "failWithInvalidMoney {argumentsWithNames}")
         @ValueSource(ints = {0, -1000, 999})
         void failWithInvalidMoney(int money) {
             assertThatThrownBy(() -> lottoSeller.buyLottoList(money))
                     .isInstanceOf(IllegalArgumentException.class);
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "success {argumentsWithNames}")
         @CsvSource({"3000, 3", "1000, 1"})
         void success(int money, int size) {
             List<Lotto> lottoList = lottoSeller.buyLottoList(money);

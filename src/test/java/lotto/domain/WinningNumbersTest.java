@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.List;
 import java.util.stream.Stream;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -19,7 +21,7 @@ class WinningNumbersTest {
         @ParameterizedTest(name = "failWithInvalidSize {argumentsWithNames}")
         @MethodSource("provideFailWithInvalidSize")
         void failWithInvalidSize(List<Integer> list) {
-            Assertions.assertThatThrownBy(() -> new WinningNumbers(list))
+            assertThatThrownBy(() -> new WinningNumbers(list))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("당첨번호의 개수는 6여야 합니다.");
         }
@@ -33,7 +35,7 @@ class WinningNumbersTest {
         @ParameterizedTest(name = "failWithDuplicateNumbers {argumentsWithNames}")
         @MethodSource("provideFailWithDuplicateNumbers")
         void failWithDuplicateNumbers(List<Integer> list) {
-            Assertions.assertThatThrownBy(() -> new WinningNumbers(list))
+            assertThatThrownBy(() -> new WinningNumbers(list))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("당첨번호는 중복된 숫자가 들어가면 안됩니다.");
         }
@@ -47,7 +49,7 @@ class WinningNumbersTest {
         @ParameterizedTest(name = "failWithInvalidRange {argumentsWithNames}")
         @MethodSource("provideFailWithInvalidRange")
         void failWithInvalidRange(List<Integer> list) {
-            Assertions.assertThatThrownBy(() -> new WinningNumbers(list))
+            assertThatThrownBy(() -> new WinningNumbers(list))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("당첨번호는 1부터 45사이의 정수여야 합니다.");
         }
@@ -59,13 +61,13 @@ class WinningNumbersTest {
         }
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "matchCount {argumentsWithNames}")
     @MethodSource("provideMatchCount")
     void matchCount(List<Integer> list, Lotto lotto, int expect) {
         WinningNumbers winningNumbers = new WinningNumbers(list);
         int matchCount = winningNumbers.matchCount(lotto);
 
-        Assertions.assertThat(matchCount).isEqualTo(expect);
+        assertThat(matchCount).isEqualTo(expect);
     }
 
     static Stream<Arguments> provideMatchCount() {

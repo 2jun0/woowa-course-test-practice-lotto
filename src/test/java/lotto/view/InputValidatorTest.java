@@ -19,7 +19,7 @@ class InputValidatorTest {
     @Nested
     class ValidateLottoPurchaseMoneyTest {
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "fail {argumentsWithNames}")
         @ValueSource(strings = {".", "1s1", "", "1,000"})
         void fail(String money) {
             assertThatThrownBy(
@@ -28,7 +28,7 @@ class InputValidatorTest {
                     .hasMessage("로또 구입 금액은 정수여야 합니다.");
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "success {argumentsWithNames}")
         @ValueSource(strings = {"3000", "1000"})
         void success(String money) {
             inputValidator.validateLottoPurchaseMoney(money);
@@ -38,7 +38,7 @@ class InputValidatorTest {
     @Nested
     class ValidateWinningNumbersTest {
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "fail {argumentsWithNames}")
         @ValueSource(strings = {".", "1,2,3,4,5", ""})
         void fail(String winningNumbers) {
             assertThatThrownBy(
@@ -47,7 +47,7 @@ class InputValidatorTest {
                     .hasMessage("당첨 번호는 \"정수,정수,정수,정수,정수,정수\" 형식으로 입력해주세요");
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "success {argumentsWithNames}")
         @ValueSource(strings = {"1,2,34,5,6,7"})
         void success(String winningNumbers) {
             inputValidator.validateWinningNumbers(winningNumbers);
@@ -57,7 +57,7 @@ class InputValidatorTest {
     @Nested
     class ValidateBonusNumberTest {
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "fail {argumentsWithNames}")
         @ValueSource(strings = {".", "1s1", "", "1,000"})
         void fail(String bonusNumber) {
             assertThatThrownBy(
@@ -66,7 +66,7 @@ class InputValidatorTest {
                     .hasMessage("보너스 번호는 정수여야 합니다.");
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "success {argumentsWithNames}")
         @ValueSource(strings = {"3", "45"})
         void success(String bonusNumber) {
             inputValidator.validateBonusNumber(bonusNumber);

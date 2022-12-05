@@ -18,7 +18,7 @@ class LottoMatcherTest {
         lottoMatcher = new LottoMatcher();
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "match {argumentsWithNames}")
     @MethodSource("provideMatch")
     void match(Lotto lotto, WinningNumbers winningNumbers, BonusNumber bonusNumber,
             LottoPrize expect) {
